@@ -89,6 +89,8 @@ public class JellyGifAnimator {
         return !images.isEmpty && images.count == frameDurations.count
     }
     
+    public var oneTimeAnimation: Bool = false
+    
     ///Initializes and returns a newly allocated JellyGifAnimator with the specified properties
     public init(imageInfo: GifInfo,
          pixelSize: GifPixelSize = .original,
@@ -148,6 +150,11 @@ public class JellyGifAnimator {
         if currentDuration >= oneCycleDuration {
             currentDuration = 0
             currentIndex = 0
+            
+            if oneTimeAnimation {
+                pauseAnimation()
+            }
+            
             return
         } else if currentDuration >= framesStartDurations[currentIndex] {
             currentIndex += 1
