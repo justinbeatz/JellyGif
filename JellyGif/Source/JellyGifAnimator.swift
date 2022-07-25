@@ -107,17 +107,17 @@ public class JellyGifAnimator {
     }
     
     ///Starts preparing GIF frames and related information. Calling this method will stop the previous preparing process
+    public static var gifQueue = OperationQueue()
+
     public func prepareAnimation() {
         stopPreparingAnimation()
-        
+
         preparingOperation = JellyGifOperation(info: imageInfo, pixelSize: preferredPixelSize) { [weak self] images, frames in
             self?.setupWith(images: images, frames: frames)
             self?.preparingOperation = nil
         }
-        
-        JellyGifAnimator.gifQueue.async {
-            self.preparingOperation?.start()
-        }
+
+        JellyGifAnimator.gifQueue.addOperation(preparingOperation!)
     }
     
     ///Computes required properties to start animating
