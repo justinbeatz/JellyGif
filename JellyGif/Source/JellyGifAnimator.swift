@@ -25,7 +25,7 @@ public extension JellyGifAnimatorDelegate {
 
 ///An object that manages the preparation and animation of a GIF
 public class JellyGifAnimator {
-    public static var gifQueue = DispatchQueue(label: "custom.jelly.gif.animator.queue")
+    public static var gifQueue = OperationQueue()
     
     public weak var delegate: JellyGifAnimatorDelegate?
     
@@ -107,8 +107,6 @@ public class JellyGifAnimator {
     }
     
     ///Starts preparing GIF frames and related information. Calling this method will stop the previous preparing process
-    public static var gifQueue = OperationQueue()
-
     public func prepareAnimation() {
         stopPreparingAnimation()
 
